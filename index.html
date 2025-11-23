@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gopin - Malas ke kopin? Gopin aja!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <button class="cat-btn" data-category="makanan-ringan">Snacks</button>
+    <button class="cat-btn" data-category="minuman">Minuman</button>
+    <button class="cat-btn" data-category="makanan-berat">Makanan Berat</button>
+    <button class="cat-btn" data-category="alat-mandi">Alat Mandi</button>
+    <button class="cat-btn" data-category="alat-tulis">Alat Tulis</button>
+    </div>
+    </nav>
+
+    <main class="container">
+        <div id="product-grid" class="product-grid">
+            <!-- Products will be injected here by JS -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Part of EDP</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Keranjang Belanja</h2>
+                <button id="close-cart" class="close-btn">&times;</button>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be injected here -->
+                <p class="empty-cart-msg">Keranjang masih kosong nih.</p>
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Biaya Layanan & Ongkir</span>
+                    <span id="cart-shipping">Rp 2.000</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cart-total">Rp 0</span>
+                </div>
+            </div>
+            <div class="cart-form">
+                <input type="text" id="customer-name" placeholder="Nama Lengkap" required>
+                <input type="text" id="customer-room" placeholder="Nomor Kamar / Asrama" required>
+                <button id="checkout-btn" class="checkout-btn">Pesan via WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    </body>
+
+</html>
