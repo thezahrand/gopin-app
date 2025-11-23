@@ -14,8 +14,14 @@ const products = [
 
 // State
 let cart = JSON.parse(localStorage.getItem('gopin_cart')) || [];
-const SHIPPING_FEE = 2000;
-const ADMIN_PHONE = '6281234567890'; // Ganti dengan nomor WA admin yang asli
+// const SHIPPING_FEE = 2000; // Removed constant
+const ADMIN_PHONE = '6281311782688'; // Updated admin number
+
+function calculateShipping(totalItems) {
+    if (totalItems === 0) return 0;
+    if (totalItems <= 5) return 2000;
+    return 5000; // 6-10 and above
+}
 
 // DOM Elements
 const productGrid = document.getElementById('product-grid');
@@ -34,18 +40,6 @@ function init() {
     renderProducts('all');
     updateCartUI();
     setupEventListeners();
-    setInterval(updateClock, 1000);
-    updateClock();
-}
-
-// Clock Logic
-function updateClock() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('id-ID', { hour12: false });
-    const clockEl = document.getElementById('clock');
-    if (clockEl) {
-        clockEl.textContent = timeString;
-    }
 }
 
 // Render Products
@@ -137,8 +131,12 @@ function updateCartUI() {
     }
 
     // Update Totals
-    const total = subtotal + (cart.length > 0 ? SHIPPING_FEE : 0);
+    // totalQty is already calculated at the top of the function
+    const shippingFee = calculateShipping(totalQty);
+    const total = subtotal + shippingFee;
+
     cartSubtotalEl.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+    document.getElementById('cart-shipping').textContent = `Rp ${shippingFee.toLocaleString('id-ID')}`;
     cartTotalEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
@@ -157,7 +155,11 @@ function handleCheckout() {
         return;
     }
 
+    // Generate Order ID
+    const orderId = generateOrderId(cart);
+
     let message = `Halo Kak, saya mau pesan dong:%0A`;
+    message += `No. Pesanan: *${orderId}*%0A`;
     message += `--------------------------------%0A`;
 
     let subtotal = 0;
@@ -166,17 +168,41 @@ function handleCheckout() {
         message += `${index + 1}. ${item.name} (${item.qty}x) - Rp ${(item.price * item.qty).toLocaleString('id-ID')}%0A`;
     });
 
-    const total = subtotal + SHIPPING_FEE;
+    // Calculate shipping based on total items
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    const shippingFee = calculateShipping(totalQty);
+    const total = subtotal + shippingFee;
 
     message += `--------------------------------%0A`;
     message += `Subtotal: Rp ${subtotal.toLocaleString('id-ID')}%0A`;
-    message += `Ongkir: Rp ${SHIPPING_FEE.toLocaleString('id-ID')}%0A`;
+    message += `Ongkir: Rp ${shippingFee.toLocaleString('id-ID')}%0A`;
     message += `*Total Bayar: Rp ${total.toLocaleString('id-ID')}*%0A%0A`;
     message += `Nama: ${name}%0A`;
     message += `Kamar: ${room}`;
 
     const waUrl = `https://wa.me/${ADMIN_PHONE}?text=${message}`;
     window.open(waUrl, '_blank');
+}
+
+function generateOrderId(cart) {
+    const now = new Date();
+    const dateStr = now.toISOString().replace(/[-:T.Z]/g, '').slice(2, 12); // YYMMDDHHMM
+    const itemsStr = cart.map(i => i.id + '' + i.qty).join('');
+    const combined = dateStr + itemsStr;
+
+    // Simple hash to get 8 digits
+    let hash = 0;
+    for (let i = 0; i < combined.length; i++) {
+        const char = combined.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+
+    // Ensure positive and take last 8 digits
+    const positiveHash = Math.abs(hash);
+    const hashStr = positiveHash.toString().padEnd(8, '0').slice(0, 8);
+
+    return hashStr;
 }
 
 // Event Listeners

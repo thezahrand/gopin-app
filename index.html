@@ -8,12 +8,31 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <button class="cat-btn" data-category="makanan-ringan">Snacks</button>
-    <button class="cat-btn" data-category="minuman">Minuman</button>
-    <button class="cat-btn" data-category="makanan-berat">Makanan Berat</button>
-    <button class="cat-btn" data-category="alat-mandi">Alat Mandi</button>
-    <button class="cat-btn" data-category="alat-tulis">Alat Tulis</button>
-    </div>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Gopin 🛒</h1>
+                <p>Malas ke kopin? Gopin aja!</p>
+            </div>
+            <button id="cart-btn" class="cart-btn">
+                Keranjang <span id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <div class="container">
+            <button class="cat-btn active" data-category="all">Semua</button>
+            <button class="cat-btn" data-category="makanan-ringan">Snacks</button>
+            <button class="cat-btn" data-category="minuman">Minuman</button>
+            <button class="cat-btn" data-category="makanan-berat">Makanan Berat</button>
+            <button class="cat-btn" data-category="alat-mandi">Alat Mandi</button>
+            <button class="cat-btn" data-category="alat-tulis">Alat Tulis</button>
+        </div>
     </nav>
 
     <main class="container">
@@ -23,8 +42,46 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>Part of EDP</p>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Cara Kerja Gopin</h3>
+                <div class="how-it-works-detailed">
+                    <div class="step">
+                        <h4>1. Kamu pesan barang lewat website</h4>
+                        <p>Tinggal buka website Go-Pin, pilih barang yang kamu mau, masukin ke keranjang, lalu checkout.
+                            Kamu cukup isi data nama, nomor kamar, nomor WA, sama catatan khusus kalau ada. Semua
+                            prosesnya tinggal klik-klik doang, cepat dan gak ribet.</p>
+                    </div>
+                    <div class="step">
+                        <h4>2. Admin menerima dan mengonfirmasi pesanan kamu</h4>
+                        <p>Setelah kamu klik “pesan”, admin langsung dapat notifikasi. Admin bakal ngecek stok, harga,
+                            sama detail pesanan kamu. Terus admin bakal hubungi kamu lewat WhatsApp buat konfirmasi,
+                            jadi kamu bisa pastiin barang yang dipesan udah benar.</p>
+                    </div>
+                    <div class="step">
+                        <h4>3. Kurir belanjain barangnya langsung ke Kopin</h4>
+                        <p>Setelah pesanan fix, kurir Go-Pin bakal berangkat ke Kopin buat belanjain semua barang yang
+                            kamu minta. Mereka pastiin barang yang dibeli itu sesuai pesanan, lengkap, dan kondisi
+                            bagus. Jadi kamu gak perlu repot keluar kamar atau nyari barang satu-satu.</p>
+                    </div>
+                    <div class="step">
+                        <h4>4. Kurir langsung antar ke kamar kamu</h4>
+                        <p>Setelah selesai belanja, kurir langsung meluncur ke kamar kamu. Pengantaran cepat karena area
+                            pengiriman fokus di lingkungan kampus/asrama, jadi gak pakai nunggu lama. Kamu tinggal
+                            siap-siap buka pintu ketika kurir sampai.</p>
+                    </div>
+                    <div class="step">
+                        <h4>5. Pembayaran di tempat (COD)</h4>
+                        <p>Begitu barang diterima, kamu bisa langsung bayar di tempat. Simple, aman, dan cocok kalau
+                            kamu belum sempat isi saldo digital. Tinggal cek barang, bayar, selesai! Gak pakai ribet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <p><a href="about.html" class="footer-link">Tentang Kami</a></p>
+                <p class="copyright">Part of EDP</p>
+            </div>
         </div>
     </footer>
 
@@ -57,11 +114,12 @@
                 <input type="text" id="customer-name" placeholder="Nama Lengkap" required>
                 <input type="text" id="customer-room" placeholder="Nomor Kamar / Asrama" required>
                 <button id="checkout-btn" class="checkout-btn">Pesan via WhatsApp</button>
+                <p class="cod-note">*Saat ini hanya menerima pembayaran COD (Bayar di Tempat)</p>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
-    </body>
+</body>
 
 </html>
